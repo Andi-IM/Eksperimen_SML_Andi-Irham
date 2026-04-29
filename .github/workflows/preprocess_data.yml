@@ -34,5 +34,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: preprocessed-dataset
-          path: preprocessing/dataset_preprocessing/healthcare_cybersecurity_10k_processed.csv
+          path: preprocessing/dataset_preprocessing/healthcare_cybersecurity_preprocessing.csv
           retention-days: 7
