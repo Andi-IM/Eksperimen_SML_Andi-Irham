@@ -58,6 +58,23 @@ def preprocess_data(df):
         bins = [-0.1, 3.9, 6.9, 8.9, 10.0]
         labels = ['LOW', 'MEDIUM', 'HIGH', 'CRITICAL']
         df_clean['CVSS_Risk_Bin'] = pd.cut(df_clean['CVSS_Score'], bins=bins, labels=labels)
+
+    # 7. Penyeleksian Fitur (Feature Selection)
+    # Menghapus fitur yang tidak memberikan nilai statistik atau berupa teks mentah
+    cols_to_drop = [
+        'CVE_ID',       # Identifier unik (tidak ada nilai statistik)
+        'Description',   # Teks mentah (memerlukan NLP/Text Mining)
+        'Reference',     # URL/Link (tidak relevan untuk model numerik)
+        'Published',     # Format tanggal mentah
+        'Last_Modified', # Format tanggal mentah
+        'CVSS_Score',    # Sudah digantikan oleh CVSS_Score_Scaled
+        'Keyword',       # Masih berupa teks mentah
+        'Status',        # Masih berupa teks mentah
+        'Weakness'       # Masih berupa teks mentah
+    ]
+    
+    # Pastikan hanya menghapus kolom yang benar-benar ada
+    df_clean = df_clean.drop(columns=[col for col in cols_to_drop if col in df_clean.columns])
         
     return df_clean
 
@@ -85,7 +102,10 @@ if __name__ == "__main__":
     try:
         df_ready = run_pipeline(test_path, output_path=out_path)
         print("Preprocessing Otomatis Berhasil!")
-        print(f"Dimensi data awal vs siap latih: {pd.read_csv(test_path).shape} -> {df_ready.shape}")
+        print(f"Dimensi data awal      : {pd.read_csv(test_path).shape}")
+        print(f"Dimensi data siap latih: {df_ready.shape}")
+        print(f"Fitur yang digunakan   : {df_ready.columns.tolist()}")
     except Exception as e:
         print("Error saat preprocessing:", e)
         raise SystemExit(1)
+
