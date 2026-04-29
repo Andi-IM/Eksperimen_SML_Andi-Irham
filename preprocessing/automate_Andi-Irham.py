@@ -100,7 +100,7 @@ if __name__ == "__main__":
     # Gunakan path relatif terhadap lokasi script ini agar bisa berjalan di OS manapun (termasuk GitHub Actions)
     base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     test_path = os.path.join(base_dir, "healthcare_cybersecurity_raw", "healthcare_cybersecurity_10k.csv")
-    out_path = os.path.join(base_dir, "preprocessing", "dataset_preprocessing", "healthcare_cybersecurity_10k_processed.csv")
+    out_path = os.path.join(base_dir, "preprocessing", "dataset_preprocessing", "healthcare_cybersecurity_preprocessing.csv")
     
     try:
         df_ready = run_pipeline(test_path, output_path=out_path)
