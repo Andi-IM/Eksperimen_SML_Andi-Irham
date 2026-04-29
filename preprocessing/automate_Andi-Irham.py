@@ -77,8 +77,11 @@ def run_pipeline(file_path, output_path=None):
     return df_processed
 
 if __name__ == "__main__":
-    test_path = r"d:\01_Projects\Eksperimen_SML_Andi-Irham\healthcare_cybersecurity_raw\healthcare_cybersecurity_10k.csv"
-    out_path = r"d:\01_Projects\Eksperimen_SML_Andi-Irham\preprocessing\dataset_preprocessing\healthcare_cybersecurity_10k_processed.csv"
+    # Gunakan path relatif terhadap lokasi script ini agar bisa berjalan di OS manapun (termasuk GitHub Actions)
+    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    test_path = os.path.join(base_dir, "healthcare_cybersecurity_raw", "healthcare_cybersecurity_10k.csv")
+    out_path = os.path.join(base_dir, "preprocessing", "dataset_preprocessing", "healthcare_cybersecurity_10k_processed.csv")
+    
     try:
         df_ready = run_pipeline(test_path, output_path=out_path)
         print("Preprocessing Otomatis Berhasil!")
