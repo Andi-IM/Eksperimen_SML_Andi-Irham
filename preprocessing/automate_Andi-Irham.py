@@ -62,7 +62,7 @@ def preprocess_data(df):
     # 7. Penyeleksian Fitur (Feature Selection)
     # Menghapus fitur yang tidak memberikan nilai statistik atau berupa teks mentah
     cols_to_drop = [
-        'CVE_ID',       # Identifier unik (tidak ada nilai statistik)
+        # 'CVE_ID',       # Identifier unik dipertahankan untuk traceability
         'Description',   # Teks mentah (memerlukan NLP/Text Mining)
         'Reference',     # URL/Link (tidak relevan untuk model numerik)
         'Published',     # Format tanggal mentah
@@ -75,6 +75,9 @@ def preprocess_data(df):
     
     # Pastikan hanya menghapus kolom yang benar-benar ada
     df_clean = df_clean.drop(columns=[col for col in cols_to_drop if col in df_clean.columns])
+    
+    # 8. Reset Index (Opsional)
+    df_clean = df_clean.reset_index(drop=True)
         
     return df_clean
 
