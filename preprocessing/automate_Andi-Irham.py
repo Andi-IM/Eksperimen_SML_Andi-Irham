@@ -88,3 +88,4 @@ if __name__ == "__main__":
         print(f"Dimensi data awal vs siap latih: {pd.read_csv(test_path).shape} -> {df_ready.shape}")
     except Exception as e:
         print("Error saat preprocessing:", e)
+        raise SystemExit(1)
