@@ -1,0 +1,38 @@
+name: Data Preprocessing Pipeline
+
+on:
+  push:
+    paths:
+      - 'healthcare_cybersecurity_raw/**'
+      - 'preprocessing/automate_Andi-Irham.py'
+  pull_request:
+    paths:
+      - 'healthcare_cybersecurity_raw/**'
+      - 'preprocessing/automate_Andi-Irham.py'
+
+jobs:
+  run-preprocessing:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+
+      - name: Set up Python
+        run: uv python install
+        
+      - name: Install dependencies
+        run: uv sync
+        
+      - name: Run Data Preprocessing Pipeline
+        run: uv run preprocessing/automate_Andi-Irham.py
+        
+      - name: Upload Processed Dataset as Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: preprocessed-dataset
+          path: preprocessing/dataset_preprocessing/healthcare_cybersecurity_10k_processed.csv
+          retention-days: 7

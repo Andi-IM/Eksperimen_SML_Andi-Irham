@@ -1,0 +1,30 @@
+About Dataset
+Healthcare Cybersecurity Vulnerabilities Dataset
+This dataset contains 1,515 real CVE (Common Vulnerabilities
+and Exposures) records related to healthcare cybersecurity.
+
+Source
+National Vulnerability Database (NVD) - NIST
+https://nvd.nist.gov
+
+Keywords Used
+hospital, patient, healthcare, medical device, OpenEMR,
+DICOM, pharmacy, clinical, EHR, ICU, pacemaker, insulin pump
+
+Columns
+CVE_ID: Unique vulnerability identifier
+Keyword: Search category used
+Published: CVE publish date
+Last_Modified: Last update date
+Status: CVE status (Analyzed/Modified)
+Description: Full vulnerability description
+Severity: LOW / MEDIUM / HIGH / CRITICAL
+CVSS_Score: Risk score (0-10)
+Attack_Vector: NETWORK / LOCAL / PHYSICAL
+Weakness: CWE weakness category
+Reference: Official reference URL
+Use Cases
+Machine Learning based threat detection
+Healthcare security research
+Vulnerability pattern analysis
+Cybersecurity awareness training
